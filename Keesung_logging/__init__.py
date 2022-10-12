@@ -13,7 +13,7 @@ import os
 import datetime as dt
 import shutil
 
-# version 0.0.3
+# version 0.0.4
 
 time_text = dt.datetime.now().strftime('%Y%m%d_%H%M%S')
 time_set = [dt.datetime.now() - dt.timedelta(days=x) for x in range(1,6)]
@@ -26,15 +26,16 @@ class my_logger:
         # info 로그 생성
         path = os.path.join(save_path, 'log', time_text.split('_')[0])
         
+        # 오늘 폴더 만들기
+        if os.path.isdir(path) == False:
+            os.mkdir(path)
+            
         # 5일전 폴더까지 삭제
         folder_list = os.listdir(os.path.join(save_path, 'log'))
         for folder in folder_list:
             if folder not in time_set:
                 shutil.rmtree(os.path.join(save_path, 'log', folder))
                 
-        # 오늘 폴더 만들기
-        if os.path.isdir(path) == False:
-            os.mkdir(path)
         if file_name == 'root':
             rootname = ''
         else:
