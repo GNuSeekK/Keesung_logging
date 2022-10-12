@@ -13,7 +13,7 @@ import os
 import datetime as dt
 import shutil
 
-# version 0.0.2
+# version 0.0.3
 
 time_text = dt.datetime.now().strftime('%Y%m%d_%H%M%S')
 time_set = [dt.datetime.now() - dt.timedelta(days=x) for x in range(1,6)]
