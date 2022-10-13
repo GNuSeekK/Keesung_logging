@@ -23,6 +23,8 @@ time_set = set([x.strftime('%Y%m%d') for x in time_set])
 class my_logger:
     
     def __init__(self, file_name = 'root', save_path = os.path.dirname(os.path.abspath(__file__))):
+        self.ori_path = save_path
+        print(self.ori_path)
         # info 로그 생성
         path = os.path.join(save_path, 'log', time_text.split('_')[0])
         
