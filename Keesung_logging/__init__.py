@@ -13,10 +13,10 @@ import os
 import datetime as dt
 import shutil
 
-# version 0.0.4
+# version 0.0.5
 
 time_text = dt.datetime.now().strftime('%Y%m%d_%H%M%S')
-time_set = [dt.datetime.now() - dt.timedelta(days=x) for x in range(1,6)]
+time_set = [dt.datetime.now() - dt.timedelta(days=x) for x in range(0,5)]
 time_set = set([x.strftime('%Y%m%d') for x in time_set])
 
 
@@ -27,8 +27,8 @@ class my_logger:
         path = os.path.join(save_path, 'log', time_text.split('_')[0])
         
         # 오늘 폴더 만들기
-        if os.path.isdir(path) == False:
-            os.mkdir(path)
+        if not os.path.exists(path):
+            os.makedirs(path)
             
         # 5일전 폴더까지 삭제
         folder_list = os.listdir(os.path.join(save_path, 'log'))
