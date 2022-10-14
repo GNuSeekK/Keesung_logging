@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name = 'Keesung_logging',
-    version='0.0.5',
+    version='0.0.6',
     description='Custom Keesung_logging',
     url='https://github.com/GNuSeekK/Keesung_logging.git',
     author='Keesung',

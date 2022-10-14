@@ -1,19 +1,18 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Aug 18 16:04:31 2022
-ver 1.0 - 모듈 생성
-ver 1.1 - 중복 실행 시 핸들러 초기화 함수 추가
-ver 1.2 - Error 로그 별도 추가(leaf node로 이용)
+v0.0.5 - 배포 가능 첫 버전
+v0.0.6 - 경로 확인 추가
 
 @author: 이기성
 """
+# version 0.0.6
 
 import logging
 import os
 import datetime as dt
 import shutil
 
-# version 0.0.5
 
 time_text = dt.datetime.now().strftime('%Y%m%d_%H%M%S')
 time_set = [dt.datetime.now() - dt.timedelta(days=x) for x in range(0,5)]
@@ -23,8 +22,6 @@ time_set = set([x.strftime('%Y%m%d') for x in time_set])
 class my_logger:
     
     def __init__(self, file_name = 'root', save_path = os.path.dirname(os.path.abspath(__file__))):
-        self.ori_path = save_path
-        print(self.ori_path)
         # info 로그 생성
         path = os.path.join(save_path, 'log', time_text.split('_')[0])
         
@@ -51,7 +48,8 @@ class my_logger:
         self.stream_handler.setFormatter(self.formatter)
         self.logger.addHandler(self.stream_handler)
         # 로그 파일에 출력
-        self.file_handler = logging.FileHandler(path + '\\' + f'{file_name}_{time_text}.log')
+        self.root_path = os.path.join(path, f'{file_name}_{time_text}.log')
+        self.file_handler = logging.FileHandler(self.root_path)
         self.file_handler.setFormatter(self.formatter)
         self.logger.addHandler(self.file_handler)
     
@@ -61,7 +59,8 @@ class my_logger:
         self.error_logger.setLevel(logging.ERROR)
         self.error_formatter = logging.Formatter('[%(asctime)s] [%(levelname)s] >> %(message)s')
         # 에러 로그 파일에 출력
-        self.error_file_handler = logging.FileHandler(path + '\\' + f'error_{time_text}.log')
+        self.error_path = os.path.join(path, f'error_{time_text}.log')
+        self.error_file_handler = logging.FileHandler(self.error_path)
         self.error_file_handler.setFormatter(self.error_formatter)
         self.error_logger.addHandler(self.error_file_handler)
         
@@ -70,3 +69,4 @@ class my_logger:
         
     def error(self, txt):
         self.error_logger.error(txt)
+        print(f'{self.error_path}를 확인해주세요')
