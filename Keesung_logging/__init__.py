@@ -3,6 +3,7 @@
 Created on Thu Aug 18 16:04:31 2022
 v0.0.5 - 배포 가능 첫 버전
 v0.0.6 - 경로 확인 추가
+v0.0.7 - error_check 추가
 
 @author: 이기성
 """
@@ -69,4 +70,13 @@ class my_logger:
         
     def error(self, txt):
         self.error_logger.error(txt)
-        print(f'{self.error_path}를 확인해주세요')
+    
+    def error_check(self):
+        """
+        파일의 실행 마지막에 error_check를 한다.
+        error가 발생한 경우 경로를 출력한다.
+        """
+        with open(self.error_path, 'r') as f:
+            data = f.read()
+        if len(data) == 0:
+            print(f'실행 도중 에러가 발생하였습니다 {self.error_path}를 확인해주세요')
