@@ -4,6 +4,7 @@ Created on Thu Aug 18 16:04:31 2022
 v0.0.5 - 배포 가능 첫 버전
 v0.0.6 - 경로 확인 추가
 v0.0.7 - error_check 추가
+v0.0.8 - error_check 오류 수정
 
 @author: 이기성
 """
@@ -78,5 +79,5 @@ class my_logger:
         """
         with open(self.error_path, 'r') as f:
             data = f.read()
-        if len(data) == 0:
+        if len(data) != 0:
             print(f'실행 도중 에러가 발생하였습니다 {self.error_path}를 확인해주세요')
